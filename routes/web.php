@@ -14,9 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('/auth/login');
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/messages/index', 'App\Http\Controllers\MessagesController@index');
+Route::get('/messages/create', 'App\Http\Controllers\MessagesController@create')->name('create');
