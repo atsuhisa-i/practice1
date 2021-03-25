@@ -2,9 +2,11 @@
 
 @section('content')
 <div>
-    <button type="button">
-        <a href={{route('create')}}> 投稿の新規作成</a>
-    </button>
+    <div class="inner">
+        <button type="button">
+            <a href={{route('create')}}> 投稿の新規作成</a>
+        </button>
+    </div>
 </div>
 
 @endsection
