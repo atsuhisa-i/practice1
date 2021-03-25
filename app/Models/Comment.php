@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasFactory;
+
+    public function messeage()
+    {
+        return $this->belongsTo('App\Message');
+    }
 }
