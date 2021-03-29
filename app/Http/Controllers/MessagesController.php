@@ -10,9 +10,10 @@ use App\Models\User;
 
 class MessagesController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('messages.index');
+        $messages = Message::orderBy('created_at', 'desc')->get();
+        return view('messages.index', ['messages' => $messages]);
     }
 
     public function create()
