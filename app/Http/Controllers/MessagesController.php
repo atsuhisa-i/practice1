@@ -54,4 +54,37 @@ class MessagesController extends Controller
         return view('messages.show')->with('message', $message);
 
     }
+
+    public function edit($id)
+    {
+        $message = Message::find($id);
+        return view('messages.edit')->with('message', $message);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $message = Message::find($id);
+
+        $alert = [
+            'title.required' => 'タイトルは必ず入力してください。',
+            'content.required' => 'メッセージは必ず入力してください。',
+        ];
+
+        $validator = Validator::make($request->all(),[
+            'title' => 'required',
+            'content' => 'required'
+        ], $alert);
+        
+        if($validator->fails()){
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }else{
+            $form = $request->all();
+            unset($form['_token']);
+            $message->fill($form)->save();
+            return redirect('/messages/index')
+                ->with('message', '更新が完了しました。');
+        }
+    }
 }

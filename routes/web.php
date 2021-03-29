@@ -26,3 +26,5 @@ Route::get('/messages/index', 'App\Http\Controllers\MessagesController@index');
 Route::get('/messages/create', 'App\Http\Controllers\MessagesController@create')->name('create');
 Route::post('/messages/store', 'App\Http\Controllers\MessagesController@store');
 Route::get('/messages/show/{id}', 'App\Http\Controllers\MessagesController@show');
+Route::get('/messages/edit/{id}', 'App\Http\Controllers\MessagesController@edit');
+Route::patch('messages/update/{id}', 'App\Http\Controllers\MessagesController@update');

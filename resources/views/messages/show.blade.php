@@ -14,7 +14,7 @@
     </table>
     @if($message->user_id == Auth::id())
         <div>
-            <button><a href="#">編集</a></button>
+            <button><a href="/messages/edit/{{$message->id}}">編集</a></button>
             <button><a href="#">削除</a></button>
         </div>
     @endif
