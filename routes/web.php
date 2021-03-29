@@ -25,3 +25,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/messages/index', 'App\Http\Controllers\MessagesController@index');
 Route::get('/messages/create', 'App\Http\Controllers\MessagesController@create')->name('create');
 Route::post('/messages/store', 'App\Http\Controllers\MessagesController@store');
+Route::get('/messages/show/{id}', 'App\Http\Controllers\MessagesController@show');

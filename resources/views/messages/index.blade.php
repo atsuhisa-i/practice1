@@ -25,7 +25,7 @@
             <td>{{$message->created_at}}</td>
             <td>{{$message->updated_at}}</td>
             <td>
-                <button><a href="#">詳細</a></button>                
+                <button><a href="/messages/show/{{$message->id}}">詳細</a></button>                
             </td>
         </tr>
     @endforeach

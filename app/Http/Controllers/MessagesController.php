@@ -12,7 +12,7 @@ class MessagesController extends Controller
 {
     public function index(Request $request)
     {
-        $messages = Message::orderBy('created_at', 'desc')->get();
+        $messages = Message::with('user')->orderBy('created_at', 'desc')->get();
         return view('messages.index', ['messages' => $messages]);
     }
 
@@ -46,5 +46,12 @@ class MessagesController extends Controller
             return redirect('/messages/index')
                 ->with('message', '投稿が完了しました。');
         }
+    }
+
+    public function show($id)
+    {
+        $message = Message::find($id);
+        return view('messages.show')->with('message', $message);
+
     }
 }
