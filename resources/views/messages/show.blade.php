@@ -15,7 +15,11 @@
     @if($message->user_id == Auth::id())
         <div>
             <button><a href="/messages/edit/{{$message->id}}">編集</a></button>
-            <button><a href="#">削除</a></button>
+            <form method="post" action="/messages/delete/{{$message->id}}">
+                @csrf
+                {{method_field('DELETE')}}
+                <input type="submit" value="削除" onclick='return confirm("削除してもよろしいですか？");'>
+            </form>
         </div>
     @endif
     <div>

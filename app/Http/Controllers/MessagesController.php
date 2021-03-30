@@ -110,4 +110,11 @@ class MessagesController extends Controller
                 ->with('message', '更新が完了しました。');
         }
     }
+
+    public function destroy($id)
+    {
+        $message = Message::find($id);
+        $message->delete();
+        return redirect('/messages/index');
+    }
 }
