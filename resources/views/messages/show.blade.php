@@ -9,7 +9,7 @@
         @if(empty($message->image))
             <tr><th>画像</th><td>画像はありません。</td></tr>
         @else
-            <tr><th>画像</th><td>{{$message->image}}</td></tr>
+            <tr><th>画像</th><td><img src="{{ Storage::url($message->image)}}"></td></tr>
         @endif
     </table>
     @if($message->user_id == Auth::id())

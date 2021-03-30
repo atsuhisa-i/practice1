@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 use App\Models\Message;
 use App\Models\User;
@@ -37,11 +38,21 @@ class MessagesController extends Controller
             return redirect('/messages/create')
                 ->withErrors($validator)
                 ->withInput();
+        }elseif($request->has('image')){
+            $message = new Message();
+            $message->title = $request->title;
+            $message->content = $request->content;
+            $getfile = $request->file('image');
+            $path = Storage::disk('public')->putFile('', $getfile);
+            $message->user_id = Auth::id();
+            $message->image = $path;
+            $message->save();
+            return redirect('/messages/index')
+                ->with('message', '投稿が完了しました。');
         }else{
             $message = new Message();
             $form = $request->all();
             $message->user_id = Auth::id();
-            unset($form['_token']);
             $message->fill($form)->save();
             return redirect('/messages/index')
                 ->with('message', '投稿が完了しました。');
@@ -51,6 +62,7 @@ class MessagesController extends Controller
     public function show($id)
     {
         $message = Message::find($id);
+        Storage::disk('local')->exists('public/storage/'.$message->image);
         return view('messages.show')->with('message', $message);
 
     }
@@ -79,9 +91,20 @@ class MessagesController extends Controller
             return back()
                 ->withErrors($validator)
                 ->withInput();
+        }elseif(request('image')){
+            $message->title = $request->title;
+            $message->content = $request->content;
+            $getfile = $request->file('image');
+            $path = Storage::disk('public')->putFile('', $getfile);
+            $message->user_id = Auth::id();
+            $message->image = $path;            
+            $message->save();
+            return redirect('/messages/index')
+                ->with('message', '更新が完了しました。');
         }else{
+            $message = new Message();
             $form = $request->all();
-            unset($form['_token']);
+            $message->user_id = Auth::id();
             $message->fill($form)->save();
             return redirect('/messages/index')
                 ->with('message', '更新が完了しました。');
