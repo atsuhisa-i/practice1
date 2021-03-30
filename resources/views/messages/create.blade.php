@@ -28,6 +28,9 @@
         <div>
             <button　type="submit">新規投稿</button>
         </div>
-    </form>    
+    </form>
+    <div>
+        <a href="/messages/index">投稿一覧に戻る</a>
+    </div>    
 </div>
 @endsection
