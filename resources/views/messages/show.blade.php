@@ -22,9 +22,25 @@
             </form>
         </div>
     @endif
+    <form action="/comment/store/{{$message->id}}" method="POST">
+        @csrf
+        <div>
+            <label for="comment">コメントする</label><br>
+            <textarea name="comment" id="comment" cols="80" rows="10" placeholder="ここにコメントを記入してください。"></textarea>
+        </div>
+        <div>
+            <button type="submit">送信</button>
+        </div>
+    </form>
     <div>
         <div>コメント一覧</div>
-        <div></div>
+        @foreach($comments as $comment)
+            <div>
+                <div>名前　　：{{$comment->user->name}}</div>
+                <div>コメント：{{$comment->comment}}</div>
+                <div>送信日時：{{$comment->created_at}}</div>
+            </div>
+        @endforeach
     </div>
     <div>
         <a href="/messages/index">投稿一覧に戻る</a>

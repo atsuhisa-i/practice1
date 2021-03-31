@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Validator;
 use App\Models\Message;
 use App\Models\User;
+use App\Models\Comment;
 
 class MessagesController extends Controller
 {
@@ -61,10 +62,11 @@ class MessagesController extends Controller
 
     public function show($id)
     {
-        $message = Message::find($id);
-        Storage::disk('local')->exists('public/storage/'.$message->image);
-        return view('messages.show')->with('message', $message);
-
+        $message = Message::find($id); 
+        $comments = Message::find($id)->comments;
+        // 下記はreturn view('messages.show', compact('comments', 'message'));という記述も可能（上記のfind()で取得した値をビューに渡す）。
+        // 他の同様の箇所も変更可能。
+        return view('messages.show', ['comments' => $comments])->with('message', $message);
     }
 
     public function edit($id)
