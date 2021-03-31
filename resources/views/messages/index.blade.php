@@ -13,6 +13,9 @@
         </button>
     </div>
 </div>
+@if($messages->isEmpty())
+<p>投稿がありません。</p>
+@else
 <table border="1">
     <tr>
         <th>id</th><th>投稿者</th><th>タイトル</th><th>作成日</th><th>更新日</th><th>処理</th>
@@ -30,4 +33,5 @@
         </tr>
     @endforeach
 </table>
+@endif
 @endsection
