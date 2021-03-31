@@ -30,3 +30,7 @@ Route::get('/messages/edit/{id}', 'App\Http\Controllers\MessagesController@edit'
 Route::patch('messages/update/{id}', 'App\Http\Controllers\MessagesController@update');
 Route::delete('/messages/delete/{id}', 'App\Http\Controllers\MessagesController@destroy');
 Route::post('/comment/store/{id}', 'App\Http\Controllers\CommentsController@store');
+Route::get('/user/show/{id}', 'App\Http\Controllers\UserController@show');
+Route::get('/user/edit/{id}', 'App\Http\Controllers\UserController@edit');
+Route::patch('/user/update/{id}', 'App\Http\Controllers\UserController@update');
+Route::delete('/user/delete/{id}', 'App\Http\Controllers\UserController@destroy');

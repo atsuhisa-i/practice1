@@ -67,6 +67,9 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+                                    @if(Auth::check())
+                                        <a href="/user/show/{{Auth::id()}}">{{'マイページ'}}</a>
+                                    @endif
                                 </div>
                             </li>
                         @endguest

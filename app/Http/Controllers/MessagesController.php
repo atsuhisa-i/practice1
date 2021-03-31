@@ -104,7 +104,6 @@ class MessagesController extends Controller
             return redirect('/messages/index')
                 ->with('message', '更新が完了しました。');
         }else{
-            $message = new Message();
             $form = $request->all();
             $message->user_id = Auth::id();
             $message->fill($form)->save();
