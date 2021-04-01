@@ -14,7 +14,13 @@ class MessagesController extends Controller
 {
     public function index(Request $request)
     {
-        $messages = Message::with('user')->orderBy('created_at', 'desc')->get();
+        $search_title = $request->search;
+        if($search_title == !'')
+        {
+            $messages = Message::where('title', 'like', '%'.$search_title.'%')->with('user')->orderby('created_at', 'desc')->paginate(5);
+        }else{
+            $messages = Message::with('user')->orderby('created_at', 'desc')->paginate(5);
+        }
         return view('messages.index', ['messages' => $messages]);
     }
 

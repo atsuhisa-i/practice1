@@ -13,6 +13,14 @@
         </button>
     </div>
 </div>
+<form>
+    <div>
+        <label for="search">タイトル検索：
+            <input type="search" name="search" id="search" value="{{request('search')}}" placeholder="キーワードを入力">
+        </label>
+        <input type="submit" value="検索">
+    </div>  
+</form>
 @if($messages->isEmpty())
 <p>投稿がありません。</p>
 @else
@@ -33,5 +41,8 @@
         </tr>
     @endforeach
 </table>
+<p>
+    {{ $messages->links('vendor.pagination.bootstrap-4')}}
+</p>
 @endif
 @endsection
