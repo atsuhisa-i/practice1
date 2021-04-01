@@ -11,6 +11,8 @@
         @else
             <tr><th>画像</th><td><img src="{{ Storage::url($message->image)}}"></td></tr>
         @endif
+        <tr><th>作成日</th><td>{{$message->created_at->format('Y年m月d日(D)H:i')}}</td></tr>
+        <tr><th>更新日</th><td>{{$message->updated_at->format('Y年m月d日(D)H:i')}}</td></tr>
     </table>
     @if($message->user_id == Auth::id())
         <div>
@@ -22,26 +24,33 @@
             </form>
         </div>
     @endif
+    <br>
     <form action="/comment/store/{{$message->id}}" method="POST">
         @csrf
         <div>
             <label for="comment">コメントする</label><br>
-            <textarea name="comment" id="comment" cols="80" rows="10" placeholder="ここにコメントを記入してください。"></textarea>
+            <textarea name="comment" id="comment" cols="50" rows="5" placeholder="ここにコメントを記入してください。"></textarea>
         </div>
         <div>
             <button type="submit">送信</button>
         </div>
     </form>
+    <br>
     <div>
-        <div>コメント一覧</div>
-        @foreach($comments as $comment)
-            <div>
-                <div>名前　　：{{$comment->user->name}}</div>
-                <div>コメント：{{$comment->comment}}</div>
-                <div>送信日時：{{$comment->created_at}}</div>
-            </div>
-        @endforeach
+        <p>コメント一覧</p>
+        @if($comments->isEmpty())
+            <p>コメントはありません。</p>
+        @else
+            @foreach($comments as $comment)
+                <div>
+                    <div>名前　　：{{$comment->user->name}}</div>
+                    <div>コメント：{{$comment->comment}}</div>
+                    <div>送信日時：{{$comment->created_at->format('Y年m月d日(D)H:i')}}</div>
+                </div>
+            @endforeach
+        @endif
     </div>
+    <br>
     <div>
         <a href="/messages/index">投稿一覧に戻る</a>
     </div>

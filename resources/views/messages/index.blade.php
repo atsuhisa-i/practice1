@@ -12,8 +12,8 @@
             <a href={{route('create')}}> 投稿の新規作成</a>
         </button>
     </div>
-</div>
-<form>
+</div><br>
+<form action="/messages/index" method="GET">
     <div>
         <label for="search">タイトル検索：
             <input type="search" name="search" id="search" value="{{request('search')}}" placeholder="キーワードを入力">
@@ -33,8 +33,8 @@
             <td>{{$message->id}}</td>
             <td>{{$message->user->name}}</td>
             <td>{{$message->title}}</td>
-            <td>{{$message->created_at}}</td>
-            <td>{{$message->updated_at}}</td>
+            <td>{{$message->created_at->format('Y年m月d日(D)H:i')}}</td>
+            <td>{{$message->updated_at->format('Y年m月d日(D)H:i')}}</td>
             <td>
                 <button><a href="/messages/show/{{$message->id}}">詳細</a></button>                
             </td>
@@ -42,7 +42,8 @@
     @endforeach
 </table>
 <p>
-    {{ $messages->links('vendor.pagination.bootstrap-4')}}
+    <!-- 検索結果を保持したままページネーションをしたい場合、下記のようにappends(request()->input())を加える。 -->
+    {{ $messages->appends(request()->input())->links('vendor.pagination.bootstrap-4') }}
 </p>
 @endif
 @endsection
