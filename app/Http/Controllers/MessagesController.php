@@ -14,12 +14,39 @@ class MessagesController extends Controller
 {
     public function index(Request $request)
     {
-        $search_title = $request->search;
-        if($search_title == !'')
-        {
-            $messages = Message::where('title', 'like', '%'.$search_title.'%')->with('user')->orderby('created_at', 'desc')->paginate(5);
-        }else{
-            $messages = Message::with('user')->orderby('created_at', 'desc')->paginate(5);
+        $search_name = $request->input('search_name');
+        $search_title = $request->input('search_title');
+
+        if(!empty($search_name) && !empty($search_title)){
+            $user_name = User::where('name', 'like', '%'.$search_name.'%')->get();
+            foreach($user_name as $user){
+                $user_id = $user->id;
+            }
+            $messages = Message::where('user_id', "$user_id")
+                                ->where('title', 'like', '%'.$search_title.'%')
+                                ->with('user')->orderby('created_at', 'desc')->paginate(5);
+        }
+        else if(!empty($search_title) && empty($search_name)){
+            $messages = Message::where('title', 'like', '%'.$search_title.'%')
+                                ->with('user')
+                                ->orderby('created_at', 'desc')
+                                ->paginate(5);
+        }
+        else if(!empty($search_name) && empty($search_title)){
+            $user_name = User::where('name', 'like', '%'.$search_name.'%')->get();
+            // get()で取得した値はコレクションインスタンスのため、foreachを使用して各値を取得する必要あり。
+            foreach($user_name as $user){
+                $user_id = $user->id;
+            }
+            $messages = Message::where('user_id', "$user_id")
+                                ->with('user')
+                                ->orderby('created_at', 'desc')
+                                ->paginate(5);
+        }
+        else{
+            $messages = Message::with('user')
+                                ->orderby('created_at', 'desc')
+                                ->paginate(5);
         }
         return view('messages.index', ['messages' => $messages]);
     }

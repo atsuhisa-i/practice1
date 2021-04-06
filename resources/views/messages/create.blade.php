@@ -25,10 +25,12 @@
             <label for="image">画像（任意）</label><br>
             <input type="file" name="image" accept="image/png,image/jpeg,image/gif">
         </div>
+        <br>
         <div>
             <button　type="submit">新規投稿</button>
         </div>
     </form>
+    <br>
     <div>
         <a href="/messages/index">投稿一覧に戻る</a>
     </div>    

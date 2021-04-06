@@ -9,6 +9,7 @@
         <tr><th>E-mail</th><td>{{$user->email}}</td></tr>
     </table>
 </div>
+<br>
 <div>
     <button><a href="/user/edit/{{Auth::id()}}">編集</a></button>
     <form method="post" action="/user/delete/{{Auth::id()}}">
@@ -17,6 +18,7 @@
         <input type="submit" value="削除" onclick='return confirm("削除してもよろしいですか？");'>
     </form>
 </div>
+<br>
 <div>
     <a href="/messages/index">投稿一覧に戻る</a>
 </div>

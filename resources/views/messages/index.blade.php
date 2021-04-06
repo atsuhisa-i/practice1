@@ -15,10 +15,18 @@
 </div><br>
 <form action="/messages/index" method="GET">
     <div>
-        <label for="search">タイトル検索：
-            <input type="search" name="search" id="search" value="{{request('search')}}" placeholder="キーワードを入力">
+        <div>検索フォーム</div>
+        <label for="search_name">投稿者：
+            <input type="search" name="search_name" id="search_name" value="{{request('search_name')}}">        
+        </label>
+        <label for="search_title">タイトル：
+            <input type="search" name="search_title" id="search_title" value="{{request('search_title')}}">
         </label>
         <input type="submit" value="検索">
+        <!-- <label for="search">タイトル検索：
+            <input type="search" name="search" id="search" value="{{request('search')}}" placeholder="キーワードを入力">
+        </label>
+        <input type="submit" value="検索"> -->
     </div>  
 </form>
 @if($messages->isEmpty())
