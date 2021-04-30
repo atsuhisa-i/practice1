@@ -53,5 +53,28 @@
     <!-- 検索結果を保持したままページネーションをしたい場合、下記のようにappends(request()->input())を加える。 -->
     {{ $messages->appends(request()->input())->links('vendor.pagination.bootstrap-4') }}
 </p>
+<div>
+    <a href="/messages/download">各投稿の内容をダウンロード</a>
+</div>
+<div>
+    <a href="/messages/json">各投稿の内容をjson形式で出力</a>
+</div>
+<div>csvファイルのインポート</div>
+<form action="/messages/import" method="POST" enctype="multipart/form-data">
+@csrf
+    <input type="file" name="csv_file" id="csv_file">
+    <div>
+        <button type="submit">保存</button>
+    </div>
+</form>
+<div>jsonファイルのインポート</div>
+<form action="/messages/json_import" method="POST" enctype="multipart/form-data">
+@csrf
+    <input type="file" name="json_file" id="json_file">
+    <div>
+        <button type="submit">保存</button>
+    </div>
+</form>
+
 @endif
 @endsection

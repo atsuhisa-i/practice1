@@ -18,8 +18,19 @@
         <input type="submit" value="削除" onclick='return confirm("削除してもよろしいですか？");'>
     </form>
 </div>
+<div>
+    <a href="/group/index">登録グループ一覧</a>
+</div>
 <br>
 <div>
     <a href="/messages/index">投稿一覧に戻る</a>
 </div>
+<a href="/user/download">登録済みユーザー情報のダウンロード</a>
+<div>CSVファイルのインポート</div>
+<form action="/user/import" method="POST" enctype="multipart/form-data">
+    <input type="file" name="svc_file" id="svc_file">
+    <div>
+        <button type="submit">保存</button>
+    </div>
+</form>
 @endsection
